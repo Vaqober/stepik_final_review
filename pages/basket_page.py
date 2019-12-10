@@ -5,5 +5,5 @@ class BasketPage(BasePage):
     def should_not_be_basket_item(self):
         self.is_not_element_present(*BasketPageLocators.ITEM_LINK)
 
-    def should_not_be_basket_message(self):
-        self.is_not_element_present(*BasketPageLocators.EMPTY_MESSAGE)
+    def should_be_basket_message(self):
+        self.is_element_present(*BasketPageLocators.EMPTY_MESSAGE)
