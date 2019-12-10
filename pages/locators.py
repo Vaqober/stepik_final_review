@@ -17,4 +17,7 @@ class BasePageLocators():
 
 
 class ProductPageLocators():
+    PRODUCT_LINK = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     PRODUCT_FORM = (By.XPATH, "//article[contains(@class, 'product_page')]")
+    ADD_BUTTON_XPATH = (By.XPATH, "//button[@class = 'btn btn-lg btn-primary btn-add-to-basket']")
+    SUCCESS_MESSAGE = (By.XPATH, "//div[contains(@class, 'alert-success')]")
