@@ -10,7 +10,7 @@ import time
 
 class TestUserAddToBasketFromProductPage():
     @pytest.fixture(scope="function", autouse=True)
-    def setup(self):
+    def setup(self, browser):
         link = ProductPageLocators.PRODUCT_LINK
         product_page = ProductPage(browser, link)
         product_page.should_be_login_link()
@@ -23,6 +23,7 @@ class TestUserAddToBasketFromProductPage():
         login_page.register_new_user(email, password)
         login_page.should_be_authorized_user()
         yield
+
     def test_user_can_add_product_to_basket(self, browser):
         link = ProductPageLocators.PRODUCT_LINK
         product_page = ProductPage(browser, link)
