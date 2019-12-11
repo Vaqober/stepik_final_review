@@ -34,6 +34,9 @@ class LoginPage(BasePage):
         self.should_be_password2_input()
 
     def register_new_user(self, email, password):
-        self.browser.find_element(*LoginPageLocators.LOGIN_FORM).send_keys(email)
+        self.browser.get(LoginPageLocators.LOGIN_LINK)
+        self.browser.find_element(*LoginPageLocators.REGISTER_EMAIL_INPUT).send_keys(email)
         self.browser.find_element(*LoginPageLocators.REGISTER_PASSWORD_INPUT).send_keys(password)
         self.browser.find_element(*LoginPageLocators.REGISTER_PASSWORD_CONFIRM_INPUT).send_keys(password)
+        self.browser.find_element(*LoginPageLocators.BUTTON_SUBMIT).click()
+

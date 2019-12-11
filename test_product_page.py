@@ -7,22 +7,19 @@ from pages.locators import LoginPageLocators
 import pytest
 import time
 
-
+@pytest.mark.classtest
 class TestUserAddToBasketFromProductPage():
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
-        link = ProductPageLocators.PRODUCT_LINK
-        product_page = ProductPage(browser, link)
-        product_page.should_be_login_link()
-        product_page.go_to_login_page()
-        login_page = LoginPage(browser, browser.current_url)
+        link = LoginPageLocators.LOGIN_LINK
+        login_page = LoginPage(browser, link)
+        login_page.open()
         login_page.should_be_login_page()
         login_page.should_be_inputs()
         email = str(time.time()) + "@fakemail.org"
         password = "test_password123456"
         login_page.register_new_user(email, password)
         login_page.should_be_authorized_user()
-        yield
 
     def test_user_can_add_product_to_basket(self, browser):
         link = ProductPageLocators.PRODUCT_LINK

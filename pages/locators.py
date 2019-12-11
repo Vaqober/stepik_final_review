@@ -12,6 +12,8 @@ class LoginPageLocators():
     REGISTER_EMAIL_INPUT = (By.CSS_SELECTOR, "#id_registration-email")
     REGISTER_PASSWORD_INPUT = (By.CSS_SELECTOR, "#id_registration-password1")
     REGISTER_PASSWORD_CONFIRM_INPUT = (By.CSS_SELECTOR, "#id_registration-password2")
+    BUTTON_SUBMIT = (By.XPATH, "//button[@name='registration_submit']")
+    LOGIN_LINK = "http://selenium1py.pythonanywhere.com/en-gb/accounts/profile/"
 
 
 class BasePageLocators():
