@@ -7,6 +7,7 @@ from pages.locators import LoginPageLocators
 import pytest
 import time
 
+
 @pytest.mark.classtest
 class TestUserAddToBasketFromProductPage():
     @pytest.fixture(scope="function", autouse=True)
@@ -35,42 +36,45 @@ class TestUserAddToBasketFromProductPage():
         product_page.open()
         product_page.should_not_be_success_message()
 
-def test_guest_can_add_product_to_basket(browser):
-    link = ProductPageLocators.PRODUCT_LINK
-    product_page = ProductPage(browser, link)
-    product_page.open()
-    product_page.add_to_basket()
-    product_page.should_be_success_message()
 
-def test_guest_cant_see_success_message(browser):
-    link = ProductPageLocators.PRODUCT_LINK
-    product_page = ProductPage(browser, link)
-    product_page.open()
-    product_page.should_not_be_success_message()
+@pytest.mark.need_review
+class TestGuestAddToBasketFromProductPage():
+    def test_guest_can_add_product_to_basket(browser):
+        link = ProductPageLocators.PRODUCT_LINK
+        product_page = ProductPage(browser, link)
+        product_page.open()
+        product_page.add_to_basket()
+        product_page.should_be_success_message()
 
-def test_guest_should_see_login_link_on_product_page(browser):
-    link = ProductPageLocators.PRODUCT_LINK
-    product_page = ProductPage(browser, link)
-    product_page.open()
-    product_page.should_be_product_page()
-    product_page.should_be_login_link()
+    def test_guest_cant_see_success_message(browser):
+        link = ProductPageLocators.PRODUCT_LINK
+        product_page = ProductPage(browser, link)
+        product_page.open()
+        product_page.should_not_be_success_message()
 
-def test_guest_can_go_to_login_page_from_product_page(browser):
-    link = ProductPageLocators.PRODUCT_LINK
-    product_page = ProductPage(browser, link)
-    product_page.open()
-    product_page.should_be_product_page()
-    product_page.should_be_login_link()
-    product_page.go_to_login_page()
-    login_page = LoginPage(browser, browser.current_url)
-    login_page.should_be_login_page()
+    def test_guest_should_see_login_link_on_product_page(browser):
+        link = ProductPageLocators.PRODUCT_LINK
+        product_page = ProductPage(browser, link)
+        product_page.open()
+        product_page.should_be_product_page()
+        product_page.should_be_login_link()
 
-def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
-    link = ProductPageLocators.PRODUCT_LINK
-    product_page = ProductPage(browser, link)
-    product_page.open()
-    product_page.should_be_basket_link()
-    product_page.go_to_basket()
-    basket_page = BasketPage(browser, browser.current_url)
-    basket_page.should_not_be_basket_item()
-    basket_page.should_be_basket_message()
+    def test_guest_can_go_to_login_page_from_product_page(browser):
+        link = ProductPageLocators.PRODUCT_LINK
+        product_page = ProductPage(browser, link)
+        product_page.open()
+        product_page.should_be_product_page()
+        product_page.should_be_login_link()
+        product_page.go_to_login_page()
+        login_page = LoginPage(browser, browser.current_url)
+        login_page.should_be_login_page()
+
+    def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+        link = ProductPageLocators.PRODUCT_LINK
+        product_page = ProductPage(browser, link)
+        product_page.open()
+        product_page.should_be_basket_link()
+        product_page.go_to_basket()
+        basket_page = BasketPage(browser, browser.current_url)
+        basket_page.should_not_be_basket_item()
+        basket_page.should_be_basket_message()
